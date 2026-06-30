@@ -15,6 +15,13 @@ spring:
                 - Path=/microservicio-pedido/**
               filters:
                 - StripPrefix=1
+          routes:
+            - id: microservicio-pago
+              uri: lb://MICROSERVICIO-PAGO
+              predicates:
+                - Path=/microservicio-pago/**
+              filters:
+                - StripPrefix=1
 
 logging:
   level:
