@@ -1,11 +1,10 @@
 server:
-  port: ${PORT} # Render inyecta el puerto automáticamente
+  port: ${PORT}
 
 spring:
   application:
     name: microservicio-pedido
   datasource:
-    # Usamos H2 en memoria para que no falle por falta de BD externa
     url: jdbc:h2:mem:db_pedido_prod;DB_CLOSE_DELAY=-1;MODE=MySQL
     driver-class-name: org.h2.Driver
     username: sa
@@ -14,16 +13,18 @@ spring:
     hibernate:
       ddl-auto: update
   flyway:
-    enabled: false # Desactivado temporalmente si no hay BD real
+    enabled: false
 
-# --- CONFIGURACON DE EUREKA ---
 eureka:
   client:
     serviceUrl:
       defaultZone: ${EUREKA_URL}
+    fetch-registry: false
+    register-with-eureka: true
+    eureka-server-connect-timeout-seconds: 5
+    eureka-server-read-timeout-seconds: 5
   instance:
     preferIpAddress: true
-
 
 cliente-service:
   url: ""
