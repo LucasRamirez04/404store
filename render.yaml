@@ -5,10 +5,7 @@ services:
     env: docker
     plan: free
     region: oregon
-    directory: ./eureka-server
-    envVars:
-      - key: PORT
-        value: 8761
+    rootDir: ./eureka-server # <-- Corregido a rootDir
 
   # 2. Microservicio de Pedidos
   - type: web
@@ -16,14 +13,13 @@ services:
     env: docker
     plan: free
     region: oregon
-    directory: ./microservicio-pedido
+    rootDir: ./microservicio-pedido # <-- Corregido a rootDir
     envVars:
       - key: PORT
         value: 8083
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: EUREKA_URL
-        # Render inyectará automáticamente la URL real que le asigne a tu Eureka Server
         value: ${eureka_server_url}/eureka/
 
   # 3. API Gateway
@@ -32,12 +28,11 @@ services:
     env: docker
     plan: free
     region: oregon
-    directory: ./api-gateway
+    rootDir: ./api-gateway # <-- Corregido a rootDir
     envVars:
       - key: PORT
         value: 8080
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: EUREKA_URL
-        # Lo mismo aquí para el Gateway
         value: ${eureka_server_url}/eureka/
