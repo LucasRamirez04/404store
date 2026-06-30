@@ -33,3 +33,18 @@ services:
         value: prod
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
+
+  # NUEVO: Microservicio de Pago
+  - type: web
+    name: microservicio-pago
+    env: docker
+    plan: free
+    region: oregon
+    rootDir: ./pago # Asegúrate de que esta sea la carpeta correcta en tu repositorio
+    envVars:
+      - key: PORT
+        value: 8084
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: EUREKA_URL
+        value: https://eureka-server-mg8f.onrender.com/eureka/

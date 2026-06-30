@@ -17,7 +17,7 @@ spring:
       ddl-auto: update
   flyway:
     enabled: true
-    baseline-on-migrate: true5
+    baseline-on-migrate: true
   # application-dev.yml
 cliente-service:
   url: http://localhost:8081

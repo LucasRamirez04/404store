@@ -1,0 +1,23 @@
+server:
+  port: 8868
+
+spring:
+  application:
+    name: microservicio-pago-test
+  datasource:
+    url: jdbc:h2:mem:db_pago_test;DB_CLOSE_DELAY=-1;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+pedido-service:
+  url: http://localhost:8083/api/store/pedidos
+
+envio-service:
+  url: http://localhost:8085/api/store/envios

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: microservicio-pago
+  profiles:
+    active: dev
+  autoconfigure:
+    exclude:
+      - org.springdoc.core.configuration.SpringDocHateoasConfiguration
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html
+
+logging:
+  level:
+    root: INFO
+    _store.pago: INFO
+  file:
+    name: logs/pago.log

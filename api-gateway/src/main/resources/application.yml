@@ -1,20 +1,27 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 spring:
   application:
     name: api-gateway
   cloud:
     gateway:
-      server:
-        webflux:
-          routes:
-            - id: microservicio-pedido
-              uri: lb://MICROSERVICIO-PEDIDO
-              predicates:
-                - Path=/microservicio-pedido/**
-              filters:
-                - StripPrefix=1
+      routes:
+        # Ruta para Pedido
+        - id: microservicio-pedido
+          uri: lb://MICROSERVICIO-PEDIDO
+          predicates:
+            - Path=/microservicio-pedido/**
+          filters:
+            - StripPrefix=1
+
+        # NUEVA Ruta para Pago
+        - id: microservicio-pago
+          uri: lb://MICROSERVICIO-PAGO
+          predicates:
+            - Path=/microservicio-pago/**
+          filters:
+            - StripPrefix=1
 
 logging:
   level:
@@ -24,6 +31,10 @@ logging:
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+      defaultZone: ${EUREKA_URL}
+    fetch-registry: true # OBLIGATORIO: El Gateway debe conocer dónde están los demás
+    register-with-eureka: true
   instance:
-    prefer-ip-address: true
+    hostname: ${RENDER_EXTERNAL_HOSTNAME:localhost} # OBLIGATORIO en Render
+    prefer-ip-address: false # OBLIGATORIO: Falso en Render
+    non-secure-port-enabled: true

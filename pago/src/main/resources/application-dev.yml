@@ -1,0 +1,33 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: microservicio-pago
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_404store_pago
+    username: root
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+
+pedido-service:
+  url: http://localhost:8083/api/store/pedidos
+
+envio-service:
+  url: http://localhost:8085/api/store/envios
