@@ -2,7 +2,10 @@ spring:
   application:
     name: microservicio-pedido
   profiles:
-    active: dev
+    active: prod
+  autoconfigure:
+    exclude:
+      - org.springdoc.core.configuration.SpringDocHateoasConfiguration
 springdoc:
   api-docs:
     enabled: true
