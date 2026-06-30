@@ -29,8 +29,6 @@ services:
     envVars:
       - key: PORT
         value: 8080
-      - key: SPRING_PROFILES_ACTIVE
-        value: prod
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
 
