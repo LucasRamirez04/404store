@@ -11,7 +11,7 @@ services:
     env: docker
     plan: free
     region: oregon
-    rootDir: ./microservicio-pedido
+    rootDir: ./pedido # <--- ¡AQUÍ ESTÁ EL CAMBIO!
     envVars:
       - key: PORT
         value: 8083
