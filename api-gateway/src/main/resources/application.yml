@@ -23,6 +23,13 @@ spring:
               filters:
                 - StripPrefix=1
 
+            - id: microservicio-inventario
+              uri: lb://MICROSERVICIO-INVENTARIO
+              predicates:
+                - Path=/microservicio-inventario/**
+              filters:
+                - StripPrefix=1
+
 logging:
   level:
     org.springframework.cloud.gateway: TRACE

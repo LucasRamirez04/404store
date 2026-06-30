@@ -3,9 +3,9 @@ server:
 
 spring:
   application:
-    name: microservicio-pago
+    name: microservicio-inventario
   datasource:
-    url: jdbc:h2:mem:db_pago_prod;DB_CLOSE_DELAY=-1;MODE=MySQL
+    url: jdbc:h2:mem:db_inventario_prod;DB_CLOSE_DELAY=-1;MODE=MySQL
     driver-class-name: org.h2.Driver
     username: sa
     password: ""
@@ -14,9 +14,6 @@ spring:
       ddl-auto: update
   flyway:
     enabled: false
-  autoconfigure:
-    exclude:
-      - org.springdoc.core.configuration.SpringDocHateoasConfiguration
 
 eureka:
   client:
@@ -29,8 +26,5 @@ eureka:
   instance:
     preferIpAddress: true
 
-pedido-service:
-  url: "https://microservicio-pedido.onrender.com"
-
-envio-service:
+producto-service:
   url: ""
