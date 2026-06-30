@@ -23,7 +23,8 @@ services:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: EUREKA_URL
-        value: https://eureka-server.onrender.com/eureka/
+        # Render inyectará automáticamente la URL real que le asigne a tu Eureka Server
+        value: ${eureka_server_url}/eureka/
 
   # 3. API Gateway
   - type: web
@@ -38,4 +39,5 @@ services:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: EUREKA_URL
-        value: https://eureka-server.onrender.com/eureka/
+        # Lo mismo aquí para el Gateway
+        value: ${eureka_server_url}/eureka/
