@@ -90,7 +90,7 @@ Base URL: `https://api-gateway-gc06.onrender.com`
 | Envío | `/microservicio-envio/api/store/envios/listar` |
 | Promoción | `/microservicio-promocion/api/store/promociones/listar` |
 | Notificación | `/microservicio-notificacion/api/store/notificaciones/listar` |
-| Inventario | `/microservicio-inventario/api/store/inventario/listar` |
+| Inventario | `/microservicio-inventario/api/store/inventarios/listar` |
 | Reseña | `/microservicio-resena/api/store/resenas/listar` |
 | Devolución | `/microservicio-devolucion/api/store/devoluciones/listar` |
 
