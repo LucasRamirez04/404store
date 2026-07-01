@@ -27,4 +27,4 @@ eureka:
     preferIpAddress: true
 
 pedido-service:
-  url: ${PEDIDO_SERVICE_URL}
+  url: ""
