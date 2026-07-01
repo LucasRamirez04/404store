@@ -92,4 +92,17 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
 
-    
+  # NUEVO: Microservicio de envio
+  - type: web
+    name: microservicio-envio
+    env: docker
+    plan: free
+    region: oregon
+    rootDir: ./envio
+    envVars:
+      - key: PORT
+        value: 8085
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: EUREKA_URL
+        value: https://eureka-server-mg8f.onrender.com/eureka/

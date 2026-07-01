@@ -1,0 +1,36 @@
+# Permite probar el contenedor de Envío de forma aislada, con su propia
+# base de datos MySQL. Cuando el equipo integre los 10 microservicios +
+# Eureka + Gateway, este servicio debería moverse al docker-compose.yml
+# general del repositorio (en la raíz), usando la misma red para que
+# Envío pueda resolver "eureka" y "pedido" por nombre de servicio.
+version: "3.9"
+
+services:
+  envio-db:
+    image: mysql:8.0
+    container_name: envio-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_404store_envio
+    ports:
+      - "3310:3306"
+    volumes:
+      - envio-db-data:/var/lib/mysql
+
+  envio:
+    build: .
+    container_name: envio-service
+    depends_on:
+      - envio-db
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_URL: jdbc:mysql://envio-db:3306/db_404store_envio
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      PEDIDO_SERVICE_URL: http://host.docker.internal:8083/api/store/pedidos
+      EUREKA_URL: http://host.docker.internal:8761/eureka
+    ports:
+      - "8085:8085"
+
+volumes:
+  envio-db-data:

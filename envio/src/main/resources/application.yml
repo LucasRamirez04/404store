@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: envio
+  profiles:
+    active: dev
+  # Necesario para evitar conflicto entre springdoc y spring-hateoas
+  # (SpringDocHateoasConfiguration interfiere con los links _links)
+  autoconfigure:
+    exclude:
+      - org.springdoc.core.configuration.SpringDocHateoasConfiguration
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html
+
+logging:
+  level:
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: DEBUG
