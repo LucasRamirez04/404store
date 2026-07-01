@@ -27,4 +27,4 @@ eureka:
     preferIpAddress: true
 
 pedido-service:
-  url: ""
+  url: "https://microservicio-pedido.onrender.com"

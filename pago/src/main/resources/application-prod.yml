@@ -33,4 +33,4 @@ pedido-service:
   url: "https://microservicio-pedido.onrender.com"
 
 envio-service:
-  url: ""
+  url: "https://microservicio-envio.onrender.com"
