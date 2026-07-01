@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: microservicio-producto
+  profiles:
+    active: prod
+  autoconfigure:
+    exclude:
+      - org.springdoc.core.configuration.SpringDocHateoasConfiguration
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /doc/swagger-ui.html
+
+logging:
+  level:
+    root: INFO
+    _store.producto: INFO
+  file:
+    name: logs/producto.log
