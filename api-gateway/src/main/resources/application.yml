@@ -71,6 +71,13 @@ spring:
                 - Path=/microservicio-notificacion/**
               filters:
                 - StripPrefix=1
+
+            - id: microservicio-promocion
+              uri: lb://MICROSERVICIO-PROMOCION
+              predicates:
+                - Path=/microservicio-promocion/**
+              filters:
+                - StripPrefix=1
 logging:
   level:
     org.springframework.cloud.gateway: TRACE
