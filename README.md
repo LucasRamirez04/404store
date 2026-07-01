@@ -29,8 +29,8 @@
 | Pedido | 8083 | Creación y seguimiento de pedidos |
 | Pago | 8084 | Procesamiento y registro de pagos |
 | Envío | 8085 | Gestión de envíos y seguimiento |
-| Promoción | 8086 | Administración de promociones y descuentos |
-| Notificación | 8087 | Envío de notificaciones a clientes |
+| Notificación | 8086 | Envío de notificaciones a clientes |
+| Promoción | 8087 | Administración de promociones y descuentos |
 | Inventario | 8088 | Control de ubicación de productos en bodega |
 | Reseña | 8089 | Gestión de reseñas de productos |
 | Devolución | 8090 | Procesamiento de devoluciones |
