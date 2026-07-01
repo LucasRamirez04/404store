@@ -1,6 +1,6 @@
 spring:
   application:
-    name: envio
+    name: microservicio-envio
   profiles:
     active: dev
   # Necesario para evitar conflicto entre springdoc y spring-hateoas

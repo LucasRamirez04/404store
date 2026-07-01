@@ -41,7 +41,7 @@ public class DataLoader {
                         .build());
 
                 // 3. Datos aleatorios con DataFaker
-                Faker faker = new Faker(new Locale("es"));
+                Faker faker = new Faker(Locale.of("es"));
                 String[] estados = {"PENDIENTE", "ENTREGADO"};
 
                 for (int i = 0; i < 3; i++) {

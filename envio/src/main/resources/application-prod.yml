@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: envio
+    name: microservicio-envio
   datasource:
     url: jdbc:h2:mem:db_404store_envio_prod;DB_CLOSE_DELAY=-1;MODE=MySQL
     driver-class-name: org.h2.Driver
