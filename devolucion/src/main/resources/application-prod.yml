@@ -28,4 +28,4 @@ eureka:
     preferIpAddress: true
 
 pedido-service:
-  url: "https://microservicio-pedido.onrender.com"
+  url: "https://microservicio-pedido.onrender.com/api/store/pedidos"

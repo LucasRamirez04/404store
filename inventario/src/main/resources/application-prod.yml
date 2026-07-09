@@ -28,4 +28,4 @@ eureka:
     preferIpAddress: true
 
 producto-service:
-  url: https://microservicio-producto-ji1e.onrender.com
+  url: https://microservicio-producto-ji1e.onrender.com/api/store/productos
