@@ -27,9 +27,7 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
       - key: DB_URL
-        fromDatabase:
-          name: db-404store
-          property: connectionString
+        value: jdbc:postgresql://dpg-d96npf8js32c7399us90-a:5432/db_404store
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -53,9 +51,7 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
       - key: DB_URL
-        fromDatabase:
-          name: db-404store
-          property: connectionString
+        value: jdbc:postgresql://dpg-d96npf8js32c7399us90-a:5432/db_404store
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -79,9 +75,7 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
       - key: DB_URL
-        fromDatabase:
-          name: db-404store
-          property: connectionString
+        value: jdbc:postgresql://dpg-d96npf8js32c7399us90-a:5432/db_404store
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -105,9 +99,7 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
       - key: DB_URL
-        fromDatabase:
-          name: db-404store
-          property: connectionString
+        value: jdbc:postgresql://dpg-d96npf8js32c7399us90-a:5432/db_404store
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -131,9 +123,7 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
       - key: DB_URL
-        fromDatabase:
-          name: db-404store
-          property: connectionString
+        value: jdbc:postgresql://dpg-d96npf8js32c7399us90-a:5432/db_404store
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -157,9 +147,7 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
       - key: DB_URL
-        fromDatabase:
-          name: db-404store
-          property: connectionString
+        value: jdbc:postgresql://dpg-d96npf8js32c7399us90-a:5432/db_404store
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -183,9 +171,7 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
       - key: DB_URL
-        fromDatabase:
-          name: db-404store
-          property: connectionString
+        value: jdbc:postgresql://dpg-d96npf8js32c7399us90-a:5432/db_404store
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -209,9 +195,7 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
       - key: DB_URL
-        fromDatabase:
-          name: db-404store
-          property: connectionString
+        value: jdbc:postgresql://dpg-d96npf8js32c7399us90-a:5432/db_404store
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -235,9 +219,7 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
       - key: DB_URL
-        fromDatabase:
-          name: db-404store
-          property: connectionString
+        value: jdbc:postgresql://dpg-d96npf8js32c7399us90-a:5432/db_404store
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -261,9 +243,7 @@ services:
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
       - key: DB_URL
-        fromDatabase:
-          name: db-404store
-          property: connectionString
+        value: jdbc:postgresql://dpg-d96npf8js32c7399us90-a:5432/db_404store
       - key: DB_USER
         fromDatabase:
           name: db-404store
