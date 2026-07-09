@@ -29,7 +29,7 @@ services:
       - key: DB_URL
         fromDatabase:
           name: db-404store
-          property: connectionString
+          property: jdbcConnectionString
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -55,7 +55,7 @@ services:
       - key: DB_URL
         fromDatabase:
           name: db-404store
-          property: connectionString
+          property: jdbcConnectionString
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -81,7 +81,7 @@ services:
       - key: DB_URL
         fromDatabase:
           name: db-404store
-          property: connectionString
+          property: jdbcConnectionString
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -107,7 +107,7 @@ services:
       - key: DB_URL
         fromDatabase:
           name: db-404store
-          property: connectionString
+          property: jdbcConnectionString
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -133,7 +133,7 @@ services:
       - key: DB_URL
         fromDatabase:
           name: db-404store
-          property: connectionString
+          property: jdbcConnectionString
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -159,7 +159,7 @@ services:
       - key: DB_URL
         fromDatabase:
           name: db-404store
-          property: connectionString
+          property: jdbcConnectionString
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -185,7 +185,7 @@ services:
       - key: DB_URL
         fromDatabase:
           name: db-404store
-          property: connectionString
+          property: jdbcConnectionString
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -211,7 +211,7 @@ services:
       - key: DB_URL
         fromDatabase:
           name: db-404store
-          property: connectionString
+          property: jdbcConnectionString
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -237,7 +237,7 @@ services:
       - key: DB_URL
         fromDatabase:
           name: db-404store
-          property: connectionString
+          property: jdbcConnectionString
       - key: DB_USER
         fromDatabase:
           name: db-404store
@@ -263,7 +263,7 @@ services:
       - key: DB_URL
         fromDatabase:
           name: db-404store
-          property: connectionString
+          property: jdbcConnectionString
       - key: DB_USER
         fromDatabase:
           name: db-404store
