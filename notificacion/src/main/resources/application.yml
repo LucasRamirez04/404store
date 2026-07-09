@@ -15,3 +15,5 @@ springdoc:
 logging:
   level:
     org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: DEBUG
+pedido-service:
+  url: http://localhost:8085

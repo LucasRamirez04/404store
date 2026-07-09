@@ -3,6 +3,7 @@ package _store.notificacion.service;
 import _store.notificacion.exception.NotificacionNoEncontradaException;
 import _store.notificacion.model.Notificacion;
 import _store.notificacion.repository.NotificacionRepository;
+import _store.notificacion.webclient.PedidoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class NotificacionService {
 
     @Autowired
     NotificacionRepository notificacionRepository;
+
+    @Autowired
+    PedidoClient pedidoClient;
 
     public List<Notificacion> listarTodos() {
         log.info("Listando todas las notificaciones");
@@ -35,17 +39,27 @@ public class NotificacionService {
         return notificacionRepository.findByClienteId(clienteId);
     }
 
-    // método que llamarán otros microservicios (pedido, pago, envio) para crear una notificación
+    // método que llamarán otros microservicios (pedido, pago, envio) para crear una notificación.
+    // Notificación valida contra el único microservicio del que depende: Pedido.
     public Notificacion crearDesdeEvento(Map<String, Object> datos) {
+        Object pedidoIdRaw = datos.get("pedidoId");
+
+        if (pedidoIdRaw != null) {
+            Integer pedidoId = ((Number) pedidoIdRaw).intValue();
+            Map<String, Object> pedido = pedidoClient.obtenerPedidoId(pedidoId);
+            if (pedido == null || pedido.isEmpty()) {
+                throw new NotificacionNoEncontradaException("No se pudo validar la notificación: pedido " + pedidoId + " no existe");
+            }
+        }
+
         Notificacion notificacion = new Notificacion();
         notificacion.setClienteId(((Number) datos.get("clienteId")).intValue());
+        notificacion.setPedidoId(pedidoIdRaw != null ? ((Number) pedidoIdRaw).intValue() : null);
         notificacion.setTipo((String) datos.get("tipo"));
         notificacion.setMensaje((String) datos.get("mensaje"));
 
         log.info("Creando notificación tipo {} para cliente ID: {}", notificacion.getTipo(), notificacion.getClienteId());
 
-        // Aquí, en el futuro, podrías integrar un servicio real de email/SMS.
-        // Por ahora, simulamos el envío con un log:
         log.info("📧 Notificación enviada -> Cliente {}: {}", notificacion.getClienteId(), notificacion.getMensaje());
         notificacion.setEstadoNotificacion("ENVIADA");
 

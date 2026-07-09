@@ -2,6 +2,7 @@ package _store.notificacion.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Notificacion {
 
     @Id
@@ -19,7 +21,10 @@ public class Notificacion {
     private Integer id;
 
     @Column(nullable = false)
-    private Integer clienteId; // id del cliente a quien se notifica
+    private Integer clienteId;
+
+    @Column(nullable = true)
+    private Integer pedidoId; // usado para validar contra el microservicio Pedido
 
     @Column(nullable = false)
     private String tipo; // PEDIDO, PAGO, ENVIO
@@ -28,7 +33,7 @@ public class Notificacion {
     private String mensaje;
 
     @Column(nullable = false)
-    private String estadoNotificacion; // PENDIENTE, ENVIADA, FALLIDA
+    private String estadoNotificacion;
 
     @Column(nullable = false)
     private LocalDate fechaEnvio;

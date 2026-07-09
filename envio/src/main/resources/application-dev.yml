@@ -1,24 +1,30 @@
 server:
   port: 8085
 
+
 spring:
   application:
-    name: envio
+    name: microservicio-envio
   datasource:
-    url: jdbc:h2:mem:db_404store_envio;DB_CLOSE_DELAY=-1;MODE=MySQL
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: ""
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+    url: jdbc:mysql://mysql-db:3306/db_404store?createDatabaseIfNotExist=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: "system"
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
+    show-sql: true
   flyway:
     enabled: true
     baseline-on-migrate: true
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    preferIpAddress: true
 
 pedido-service:
   url: http://localhost:8083/api/store/pedidos

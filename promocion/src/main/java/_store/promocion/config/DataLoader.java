@@ -22,21 +22,23 @@ public class DataLoader {
                 List<Promocion> promocionesNuevas = new ArrayList<>();
 
                 // 1. Cupón fijo para pruebas predecibles
-                Promocion fija = new Promocion();
-                fija.setCodigo("VERANO2026");
-                fija.setPorcentajeDescuento(15.0);
-                fija.setFechaInicio(LocalDate.now());
-                fija.setFechaExpiracion(LocalDate.now().plusMonths(6));
-                fija.setActivo(true);
+                Promocion fija = Promocion.builder()
+                        .codigo("VERANO2026")
+                        .porcentajeDescuento(15.0)
+                        .fechaInicio(LocalDate.now())
+                        .fechaExpiracion(LocalDate.now().plusMonths(6))
+                        .activo(true)
+                        .build();
                 promocionesNuevas.add(fija);
 
                 // 2. Cupón ya expirado, para probar el caso de error
-                Promocion expirado = new Promocion();
-                expirado.setCodigo("INVIERNO2024");
-                expirado.setPorcentajeDescuento(10.0);
-                expirado.setFechaInicio(LocalDate.now().minusYears(1));
-                expirado.setFechaExpiracion(LocalDate.now().minusMonths(2));
-                expirado.setActivo(true);
+                Promocion expirado = Promocion.builder()
+                        .codigo("INVIERNO2024")
+                        .porcentajeDescuento(10.0)
+                        .fechaInicio(LocalDate.now().minusYears(1))
+                        .fechaExpiracion(LocalDate.now().minusMonths(2))
+                        .activo(true)
+                        .build();
                 promocionesNuevas.add(expirado);
 
                 // 3. Inicializamos Datafaker en español
@@ -44,12 +46,13 @@ public class DataLoader {
 
                 // 4. Generamos 4 cupones aleatorios
                 for (int i = 0; i < 4; i++) {
-                    Promocion p = new Promocion();
-                    p.setCodigo(faker.commerce().promotionCode().toUpperCase());
-                    p.setPorcentajeDescuento((double) faker.number().numberBetween(5, 40));
-                    p.setFechaInicio(LocalDate.now());
-                    p.setFechaExpiracion(LocalDate.now().plusMonths(faker.number().numberBetween(1, 12)));
-                    p.setActivo(true);
+                    Promocion p = Promocion.builder()
+                            .codigo(faker.commerce().promotionCode().toUpperCase())
+                            .porcentajeDescuento((double) faker.number().numberBetween(5, 40))
+                            .fechaInicio(LocalDate.now())
+                            .fechaExpiracion(LocalDate.now().plusMonths(faker.number().numberBetween(1, 12)))
+                            .activo(true)
+                            .build();
                     promocionesNuevas.add(p);
                 }
 

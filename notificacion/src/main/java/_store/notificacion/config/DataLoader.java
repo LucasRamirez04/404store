@@ -22,12 +22,13 @@ public class DataLoader {
                 List<Notificacion> notificacionesNuevas = new ArrayList<>();
 
                 // 1. Una notificación fija para pruebas predecibles (ideal para Postman)
-                Notificacion fija = new Notificacion();
-                fija.setClienteId(1);
-                fija.setTipo("PEDIDO");
-                fija.setMensaje("Tu pedido #1 fue creado exitosamente. Total: $45000");
-                fija.setEstadoNotificacion("ENVIADA");
-                fija.setFechaEnvio(LocalDate.now());
+                Notificacion fija = Notificacion.builder()
+                        .clienteId(1)
+                        .tipo("PEDIDO")
+                        .mensaje("Tu pedido #1 fue creado exitosamente. Total: $45000")
+                        .estadoNotificacion("ENVIADA")
+                        .fechaEnvio(LocalDate.now())
+                        .build();
                 notificacionesNuevas.add(fija);
 
                 // 2. Inicializamos Datafaker en español
@@ -36,12 +37,13 @@ public class DataLoader {
 
                 // 3. Generamos 6 notificaciones aleatorias
                 for (int i = 0; i < 6; i++) {
-                    Notificacion n = new Notificacion();
-                    n.setClienteId(faker.number().numberBetween(1, 10));
-                    n.setTipo(tipos[faker.number().numberBetween(0, 3)]);
-                    n.setMensaje(faker.lorem().sentence(8));
-                    n.setEstadoNotificacion("ENVIADA");
-                    n.setFechaEnvio(LocalDate.now());
+                    Notificacion n = Notificacion.builder()
+                            .clienteId(faker.number().numberBetween(1, 10))
+                            .tipo(tipos[faker.number().numberBetween(0, 3)])
+                            .mensaje(faker.lorem().sentence(8))
+                            .estadoNotificacion("ENVIADA")
+                            .fechaEnvio(LocalDate.now())
+                            .build();
                     notificacionesNuevas.add(n);
                 }
 
