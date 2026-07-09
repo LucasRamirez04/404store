@@ -1,6 +1,0 @@
-target/
-logs/
-*.log
-.idea/
-.git/
-*.iml
