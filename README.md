@@ -11,10 +11,10 @@
 | Nombre |
 |---|
 | Lucas Ramírez |
-| Javier Alvarado | 
+| Javier Alvarado |
 | Franco Pacheco |
-| Lucas Pizarro | 
-| Nicolas Aravena | 
+| Lucas Pizarro |
+| Nicolas Aravena |
 
 ---
 
@@ -45,7 +45,8 @@
 | **Spring Cloud Gateway** | API Gateway que centraliza y enruta todas las peticiones entrantes |
 | **Netflix Eureka** | Servidor de registro que permite a los servicios descubrirse entre sí |
 | **Spring Data JPA** | Abstracción para el acceso y persistencia de datos con la base de datos |
-| **H2 / MySQL** | H2 en memoria para producción y test; MySQL local para desarrollo |
+| **PostgreSQL** | Base de datos relacional en la nube para el entorno de producción (Render) |
+| **MySQL** | Base de datos relacional para el entorno de desarrollo local |
 | **Flyway** | Gestiona y versiona las migraciones del esquema de base de datos |
 | **Spring HATEOAS** | Agrega hipervínculos a las respuestas REST para navegabilidad |
 | **WebClient** | Cliente reactivo para la comunicación HTTP entre microservicios |
@@ -53,8 +54,31 @@
 | **JUnit 5 + Mockito** | Framework de pruebas unitarias con mocking de dependencias |
 | **Datafaker** | Genera datos de prueba realistas al iniciar cada microservicio |
 | **Docker** | Empaqueta cada microservicio en un contenedor para su despliegue |
+| **Docker Compose** | Orquesta todos los microservicios para ejecución local con un solo comando |
 | **Render** | Plataforma cloud donde están desplegados todos los microservicios |
 | **GitHub** | Control de versiones y colaboración del equipo |
+
+---
+
+## 🗄️ Base de Datos en la Nube
+
+Todos los microservicios en producción comparten una única base de datos **PostgreSQL** alojada en **Render**. Cada microservicio gestiona sus propias tablas de forma independiente, las cuales son creadas automáticamente por Hibernate al arrancar el servicio por primera vez (`ddl-auto: update`).
+
+Las credenciales de conexión se inyectan de forma segura mediante variables de entorno definidas en el `render.yaml`:
+
+| Variable | Descripción |
+|---|---|
+| `DB_URL` | URL de conexión interna de PostgreSQL en Render |
+| `DB_USER` | Usuario de la base de datos |
+| `DB_PASSWORD` | Contraseña de la base de datos |
+
+La separación por perfiles garantiza que cada entorno use su propia base de datos:
+
+| Perfil | Base de datos |
+|---|---|
+| `dev` | MySQL local (Laragon o Docker Compose) |
+| `test` | H2 en memoria (aislada por prueba) |
+| `prod` | PostgreSQL en Render |
 
 ---
 
@@ -79,20 +103,18 @@
 
 ## 🔀 Rutas del API Gateway
 
-Base URL: `https://api-gateway-gc06.onrender.com`
-
-| Microservicio | Ejemplo de ruta |
+| Microservicio | URL completa |
 |---|---|
-| Cliente | `/microservicio-cliente/api/store/clientes/listar` |
-| Producto | `/microservicio-producto/api/store/productos/listar` |
-| Pedido | `/microservicio-pedido/api/store/pedidos/listar` |
-| Pago | `/microservicio-pago/api/store/pagos/listar` |
-| Envío | `/microservicio-envio/api/store/envios/listar` |
-| Promoción | `/microservicio-promocion/api/store/promociones/listar` |
-| Notificación | `/microservicio-notificacion/api/store/notificaciones/listar` |
-| Inventario | `/microservicio-inventario/api/store/inventarios/listar` |
-| Reseña | `/microservicio-resena/api/store/resenas/listar` |
-| Devolución | `/microservicio-devolucion/api/store/devoluciones/listar` |
+| Cliente | https://api-gateway-gc06.onrender.com/microservicio-cliente/api/store/clientes/listar |
+| Producto | https://api-gateway-gc06.onrender.com/microservicio-producto/api/store/productos/listar |
+| Pedido | https://api-gateway-gc06.onrender.com/microservicio-pedido/api/store/pedidos/listar |
+| Pago | https://api-gateway-gc06.onrender.com/microservicio-pago/api/store/pagos/listar |
+| Envío | https://api-gateway-gc06.onrender.com/microservicio-envio/api/store/envios/listar |
+| Promoción | https://api-gateway-gc06.onrender.com/microservicio-promocion/api/store/promociones/listar |
+| Notificación | https://api-gateway-gc06.onrender.com/microservicio-notificacion/api/store/notificaciones/listar |
+| Inventario | https://api-gateway-gc06.onrender.com/microservicio-inventario/api/store/inventarios/listar |
+| Reseña | https://api-gateway-gc06.onrender.com/microservicio-resena/api/store/resenas/listar |
+| Devolución | https://api-gateway-gc06.onrender.com/microservicio-devolucion/api/store/devoluciones/listar |
 
 ---
 
@@ -112,3 +134,5 @@ Cada microservicio expone su documentación en `/doc/swagger-ui.html`:
 | Inventario | https://microservicio-inventario.onrender.com/doc/swagger-ui.html |
 | Reseña | https://microservicio-resena.onrender.com/doc/swagger-ui.html |
 | Devolución | https://microservicio-devolucion.onrender.com/doc/swagger-ui.html |
+
+---

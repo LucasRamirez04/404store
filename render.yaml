@@ -1,3 +1,10 @@
+databases:
+  - name: db-404store
+    databaseName: db_404store
+    user: admin_404store
+    plan: free
+    region: oregon
+
 services:
   - type: web
     name: eureka-server
@@ -5,6 +12,58 @@ services:
     plan: free
     region: oregon
     rootDir: ./eureka-server
+
+  - type: web
+    name: microservicio-cliente
+    env: docker
+    plan: free
+    region: oregon
+    rootDir: ./cliente
+    envVars:
+      - key: PORT
+        value: 8081
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: EUREKA_URL
+        value: https://eureka-server-mg8f.onrender.com/eureka/
+      - key: DB_URL
+        fromDatabase:
+          name: db-404store
+          property: connectionString
+      - key: DB_USER
+        fromDatabase:
+          name: db-404store
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: db-404store
+          property: password
+
+  - type: web
+    name: microservicio-producto
+    env: docker
+    plan: free
+    region: oregon
+    rootDir: ./producto
+    envVars:
+      - key: PORT
+        value: 8082
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: EUREKA_URL
+        value: https://eureka-server-mg8f.onrender.com/eureka/
+      - key: DB_URL
+        fromDatabase:
+          name: db-404store
+          property: connectionString
+      - key: DB_USER
+        fromDatabase:
+          name: db-404store
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: db-404store
+          property: password
 
   - type: web
     name: microservicio-pedido
@@ -19,26 +78,25 @@ services:
         value: prod
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
+      - key: DB_URL
+        fromDatabase:
+          name: db-404store
+          property: connectionString
+      - key: DB_USER
+        fromDatabase:
+          name: db-404store
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: db-404store
+          property: password
 
-  - type: web
-    name: api-gateway
-    env: docker
-    plan: free
-    region: oregon
-    rootDir: ./api-gateway
-    envVars:
-      - key: PORT
-        value: 8080
-      - key: EUREKA_URL
-        value: https://eureka-server-mg8f.onrender.com/eureka/
-
-  # NUEVO: Microservicio de Pago
   - type: web
     name: microservicio-pago
     env: docker
     plan: free
     region: oregon
-    rootDir: ./pago # Asegúrate de que esta sea la carpeta correcta en tu repositorio
+    rootDir: ./pago
     envVars:
       - key: PORT
         value: 8084
@@ -46,53 +104,19 @@ services:
         value: prod
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
-  
-  # NUEVO: Microservicio de Inventario
-  - type: web
-    name: microservicio-inventario
-    env: docker
-    plan: free
-    region: oregon
-    rootDir: ./inventario
-    envVars:
-      - key: PORT
-        value: 8088
-      - key: SPRING_PROFILES_ACTIVE
-        value: prod
-      - key: EUREKA_URL
-        value: https://eureka-server-mg8f.onrender.com/eureka/
-  
-  # NUEVO: Microservicio de cliente
-  - type: web
-    name: microservicio-cliente
-    env: docker
-    plan: free
-    region: oregon
-    rootDir: ./cliente
-    envVars:
-      - key: PORT
-        value: 8081
-      - key: SPRING_PROFILES_ACTIVE
-        value: prod
-      - key: EUREKA_URL
-        value: https://eureka-server-mg8f.onrender.com/eureka/
+      - key: DB_URL
+        fromDatabase:
+          name: db-404store
+          property: connectionString
+      - key: DB_USER
+        fromDatabase:
+          name: db-404store
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: db-404store
+          property: password
 
-  # NUEVO: Microservicio de producto
-  - type: web
-    name: microservicio-producto
-    env: docker
-    plan: free
-    region: oregon
-    rootDir: ./producto
-    envVars:
-      - key: PORT
-        value: 8082
-      - key: SPRING_PROFILES_ACTIVE
-        value: prod
-      - key: EUREKA_URL
-        value: https://eureka-server-mg8f.onrender.com/eureka/
-
-  # NUEVO: Microservicio de envio
   - type: web
     name: microservicio-envio
     env: docker
@@ -106,38 +130,19 @@ services:
         value: prod
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
-  
-  # NUEVO: Microservicio de resena
-  - type: web
-    name: microservicio-resena
-    env: docker
-    plan: free
-    region: oregon
-    rootDir: ./resena
-    envVars:
-      - key: PORT
-        value: 8089
-      - key: SPRING_PROFILES_ACTIVE
-        value: prod
-      - key: EUREKA_URL
-        value: https://eureka-server-mg8f.onrender.com/eureka/
-    
-  # NUEVO: Microservicio de devolucion
-  - type: web
-    name: microservicio-devolucion
-    env: docker
-    plan: free
-    region: oregon
-    rootDir: ./devolucion
-    envVars:
-      - key: PORT
-        value: 8090
-      - key: SPRING_PROFILES_ACTIVE
-        value: prod
-      - key: EUREKA_URL
-        value: https://eureka-server-mg8f.onrender.com/eureka/
-  
-    # NUEVO: Microservicio de notificacion
+      - key: DB_URL
+        fromDatabase:
+          name: db-404store
+          property: connectionString
+      - key: DB_USER
+        fromDatabase:
+          name: db-404store
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: db-404store
+          property: password
+
   - type: web
     name: microservicio-notificacion
     env: docker
@@ -151,8 +156,19 @@ services:
         value: prod
       - key: EUREKA_URL
         value: https://eureka-server-mg8f.onrender.com/eureka/
-    
-    # NUEVO: Microservicio de notificacion
+      - key: DB_URL
+        fromDatabase:
+          name: db-404store
+          property: connectionString
+      - key: DB_USER
+        fromDatabase:
+          name: db-404store
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: db-404store
+          property: password
+
   - type: web
     name: microservicio-promocion
     env: docker
@@ -162,6 +178,110 @@ services:
     envVars:
       - key: PORT
         value: 8087
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: EUREKA_URL
+        value: https://eureka-server-mg8f.onrender.com/eureka/
+      - key: DB_URL
+        fromDatabase:
+          name: db-404store
+          property: connectionString
+      - key: DB_USER
+        fromDatabase:
+          name: db-404store
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: db-404store
+          property: password
+
+  - type: web
+    name: microservicio-inventario
+    env: docker
+    plan: free
+    region: oregon
+    rootDir: ./inventario
+    envVars:
+      - key: PORT
+        value: 8088
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: EUREKA_URL
+        value: https://eureka-server-mg8f.onrender.com/eureka/
+      - key: DB_URL
+        fromDatabase:
+          name: db-404store
+          property: connectionString
+      - key: DB_USER
+        fromDatabase:
+          name: db-404store
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: db-404store
+          property: password
+
+  - type: web
+    name: microservicio-resena
+    env: docker
+    plan: free
+    region: oregon
+    rootDir: ./resena
+    envVars:
+      - key: PORT
+        value: 8089
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: EUREKA_URL
+        value: https://eureka-server-mg8f.onrender.com/eureka/
+      - key: DB_URL
+        fromDatabase:
+          name: db-404store
+          property: connectionString
+      - key: DB_USER
+        fromDatabase:
+          name: db-404store
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: db-404store
+          property: password
+
+  - type: web
+    name: microservicio-devolucion
+    env: docker
+    plan: free
+    region: oregon
+    rootDir: ./devolucion
+    envVars:
+      - key: PORT
+        value: 8090
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: EUREKA_URL
+        value: https://eureka-server-mg8f.onrender.com/eureka/
+      - key: DB_URL
+        fromDatabase:
+          name: db-404store
+          property: connectionString
+      - key: DB_USER
+        fromDatabase:
+          name: db-404store
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: db-404store
+          property: password
+
+  - type: web
+    name: api-gateway
+    env: docker
+    plan: free
+    region: oregon
+    rootDir: ./api-gateway
+    envVars:
+      - key: PORT
+        value: 8080
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: EUREKA_URL

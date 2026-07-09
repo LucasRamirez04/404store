@@ -5,16 +5,14 @@ spring:
   application:
     name: microservicio-pago
   datasource:
-    url: jdbc:mysql://localhost:3306/db_404store_pago
+    url: jdbc:mysql://mysql-db:3306/db_404store?createDatabaseIfNotExist=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: ""
+    password: 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
   flyway:
     enabled: true
     baseline-on-migrate: true
@@ -22,12 +20,12 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
   instance:
     preferIpAddress: true
 
 pedido-service:
-  url: http://localhost:8083/api/store/pedidos
+  url: http://microservicio-pedido:8083
 
 envio-service:
-  url: http://localhost:8085/api/store/envios
+  url: http://microservicio-envio:8085

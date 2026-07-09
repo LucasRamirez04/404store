@@ -27,7 +27,7 @@ eureka:
     preferIpAddress: true
 
 cliente-service:
-  url: ""
+  url: "https://microservicio-cliente.onrender.com/api/store/clientes"
 
 producto-service:
-  url: ""
+  url: "https://microservicio-producto-ji1e.onrender.com/api/store/productos"

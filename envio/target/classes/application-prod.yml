@@ -1,0 +1,30 @@
+server:
+  port: ${PORT}
+
+spring:
+  application:
+    name: microservicio-envio
+  datasource:
+    url: jdbc:h2:mem:db_404store_envio_prod;DB_CLOSE_DELAY=-1;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+  flyway:
+    enabled: false
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URL}
+    fetch-registry: false
+    register-with-eureka: true
+    eureka-server-connect-timeout-seconds: 5
+    eureka-server-read-timeout-seconds: 5
+  instance:
+    preferIpAddress: true
+
+pedido-service:
+  url: "https://microservicio-pedido.onrender.com/api/store/pedidos"

@@ -1,0 +1,245 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_404store
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - 404store-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  eureka-server:
+    build:
+      context: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - 404store-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+
+  microservicio-cliente:
+    build:
+      context: ./cliente
+    container_name: microservicio-cliente
+    ports:
+      - "8081:8081"
+    environment:
+      - PORT=8081
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - 404store-network
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+
+
+  microservicio-producto:
+    build:
+      context: ./producto
+    container_name: microservicio-producto
+    ports:
+      - "8082:8082"
+    environment:
+      - PORT=8082
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - 404store-network
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+
+
+  microservicio-pedido:
+    build:
+      context: ./pedido
+    container_name: microservicio-pedido
+    ports:
+      - "8083:8083"
+    environment:
+      - PORT=8083
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - 404store-network
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      microservicio-cliente:
+        condition: service_started
+      microservicio-producto:
+        condition: service_started
+      microservicio-pago:
+        condition: service_started
+
+
+  microservicio-pago:
+    build:
+      context: ./pago
+    container_name: microservicio-pago
+    ports:
+      - "8084:8084"
+    environment:
+      - PORT=8084
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - 404store-network
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+
+
+  microservicio-envio:
+    build:
+      context: ./envio
+    container_name: microservicio-envio
+    ports:
+      - "8085:8085"
+    environment:
+      - PORT=8085
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - 404store-network
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+
+
+  microservicio-notificacion:
+    build:
+      context: ./notificacion
+    container_name: microservicio-notificacion
+    ports:
+      - "8086:8086"
+    environment:
+      - PORT=8086
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - 404store-network
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+
+
+  microservicio-promocion:
+    build:
+      context: ./promocion
+    container_name: microservicio-promocion
+    ports:
+      - "8087:8087"
+    environment:
+      - PORT=8087
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - 404store-network
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+
+
+  microservicio-inventario:
+    build:
+      context: ./inventario
+    container_name: microservicio-inventario
+    ports:
+      - "8088:8088"
+    environment:
+      - PORT=8088
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - 404store-network
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+      microservicio-producto:
+        condition: service_started
+
+
+  microservicio-resena:
+    build:
+      context: ./resena
+    container_name: microservicio-resena
+    ports:
+      - "8089:8089"
+    environment:
+      - PORT=8089
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - 404store-network
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+
+
+  microservicio-devolucion:
+    build:
+      context: ./devolucion
+    container_name: microservicio-devolucion
+    ports:
+      - "8090:8090"
+    environment:
+      - PORT=8090
+      - SPRING_PROFILES_ACTIVE=dev
+    networks:
+      - 404store-network
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - SPRING_PROFILES_ACTIVE=dev
+      - EUREKA_URL=http://eureka-server:8761/eureka/
+    networks:
+      - 404store-network
+    depends_on:
+      eureka-server:
+        condition: service_healthy
+
+networks:
+  404store-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
